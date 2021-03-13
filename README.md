@@ -4,22 +4,40 @@
 
 作成後のページ画像を載せたい
 
-# Features
 
 # Requirement
 
 "hoge"を動かすのに必要なライブラリなどを列挙する
 
-* huga 3.5.2
-* hogehuga 1.0.2
+* Docker-compose 3.8
+* nginx:1.18-alpine
+* mysql:8.0
+* php:7.4-fpm-buster
+* Laravel Framework 8.32.1
 
-# Installation
+# ディレクトリ構成
 
 Requirementで列挙したライブラリなどのインストール方法を説明する
 
 ```bash
-pip install huga_package
+├── README.md
+├── infra
+│   ├── mysql
+│   │   ├── Dockerfile
+│   │   └── my.cnf
+│   ├── nginx
+│   │   └── default.conf
+│   └── php
+│       ├── Dockerfile
+│       └── php.ini
+├── docker-compose.yml
+└── backend
 ```
+
+#Installation
+'''bash
+aiueo
+'''
 
 # Usage
 
