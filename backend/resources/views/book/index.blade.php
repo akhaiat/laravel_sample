@@ -1,27 +1,40 @@
 @extends('book/layout')
 @section('content')
 <div class="container ops-main">
-<div class="row">
-  <div class="col-md-12">
-    <h3 class="ops-title">Books</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="ops-title">Books</h3>
+    </div>
   </div>
-</div>
+
 
 <!--↓↓ 検索フォーム ↓↓-->
-<div class="col-sm-4" style="padding:20px 0; padding-left:0px;">
-<form class="form-inline" action="{{url('/book')}}">
-  <div class="form-group">
-  <input type="text" name="keyword" value="{{$keyword}}" class="form-control" placeholder="名前を入力してください">
+  <div class="col-sm-4" style="padding:20px 0; padding-left:0px;">
+    <form class="form-inline" action="{{url('/book')}}">
+      <div class="form-group" style="display:inline-flex">
+        <input type="text" name="keyword" value="{{$keyword}}" class="form-control" placeholder="名前を入力してください">
+        <input type="submit" value="検索" class="btn btn-info">
+      </div>
+    </form>
   </div>
-  <input type="submit" value="検索" class="btn btn-info">
-</form>
-</div>
 <!--↑↑ 検索フォーム ↑↑-->
-<div class="col-sm-8" style="text-align:right;">
-  <div class="paginate">
-  {{ $books->appends(Request::only('keyword'))->links() }}
+
+  <div class="col-sm-8" style="text-align:right;">
+    <div class="paginate">
+    {{ $books->appends(Request::only('keyword'))->links() }}
+    </div>
   </div>
-</div>
+
+  <div class="form-group row">
+    <lavel for="column" class="col-md-4 col-form-label text-md-right">書籍名、著者</label>
+    <div class="col-md-6">
+      <select class="form-control" id="column" name="column">
+        <option value="null" selected>書籍名、著者</option>
+        <option value="name">書籍名</option>
+        <option value="author">著者</option>
+      </select>
+    </div>
+  </div>
 
 <div class="row">
   <div class="col-md-11 col-md-offset-1">
@@ -56,4 +69,6 @@
     <div><a href="/book/create" class="btn btn-default">新規作成</a></div>
   </div>
 </div>
+</div>
+
 @endsection

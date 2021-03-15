@@ -14,14 +14,20 @@ class BookController extends Controller
   {
       #キーワード受け取り
       $keyword = $request->input('keyword');
-
+      $column = $request->column;
       #クエリ生成
       $query = Book::query();
 
       #もしキーワードがあったら
       if(!empty($keyword))
       {
-        $query->where('name','like','%'.$keyword.'%')->orWhere('author','like','%'.$keyword.'%');
+        if(!empty($column)){
+          echo $column;
+          $query->where($column,'like','%'.$keyword.'%');
+        }else{
+          echo $column;
+          $query->where('name','like','%'.$keyword.'%')->orWhere('author','like','%'.$keyword.'%');
+        }
       }
 
       #ページネーション
