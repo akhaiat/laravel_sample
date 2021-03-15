@@ -10,13 +10,30 @@ use App\Http\Requests\BookRequest;
 class BookController extends Controller
 {
 
-  public function index()
+  public function index(Request $request)
   {
-      // DBよりBookテーブルの値を全て取得
-      $books = Book::all();
+      #キーワード受け取り
+      $keyword = $request->input('keyword');
+      $column = $request->column;
+      #クエリ生成
+      $query = Book::query();
 
-      // 取得した値をビュー「book/index」に渡す
-      return view('book/index', compact('books'));
+      #もしキーワードがあったら
+      if(!empty($keyword))
+      {
+        if(!empty($column)){
+          echo $column;
+          $query->where($column,'like','%'.$keyword.'%');
+        }else{
+          echo $column;
+          $query->where('name','like','%'.$keyword.'%')->orWhere('author','like','%'.$keyword.'%');
+        }
+      }
+
+      #ページネーション
+      $data = $query->orderBy('created_at','desc')->paginate(10);
+      return view('book.index')->with('books',$data)
+      ->with('keyword',$keyword);
   }
 
   public function edit($id)
