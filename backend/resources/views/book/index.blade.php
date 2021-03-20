@@ -15,24 +15,27 @@
         <input type="text" name="keyword" value="{{$keyword}}" class="form-control" placeholder="名前を入力してください">
         <input type="submit" value="検索" class="btn btn-info">
       </div>
+
+      <div class="form-group row">
+        <lavel class="col-md-4 col-form-label text-md-right">書籍名、著者</label>
+        <div class="col-md-6">
+          <select class="form-control" id="col" name="col">
+            <option value="">書籍名、著者</option>
+            <option value="name">書籍名</option>
+            <option value="author">著者</option>
+          </select>
+        </div>
+      </div>
+
     </form>
   </div>
 <!--↑↑ 検索フォーム ↑↑-->
 
+  
+
   <div class="col-sm-8" style="text-align:right;">
     <div class="paginate">
-    {{ $books->appends(Request::only('keyword'))->links() }}
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <lavel for="column" class="col-md-4 col-form-label text-md-right">書籍名、著者</label>
-    <div class="col-md-6">
-      <select class="form-control" id="column" name="column">
-        <option value="null" selected>書籍名、著者</option>
-        <option value="name">書籍名</option>
-        <option value="author">著者</option>
-      </select>
+    {{ $books->appends(Request::only('keyword','col'))->links() }}
     </div>
   </div>
 
