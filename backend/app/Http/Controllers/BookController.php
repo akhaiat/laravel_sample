@@ -14,18 +14,18 @@ class BookController extends Controller
   {
       #キーワード受け取り
       $keyword = $request->input('keyword');
-      $column = $request->column;
+      $col = $request->col;
       #クエリ生成
       $query = Book::query();
 
       #もしキーワードがあったら
       if(!empty($keyword))
       {
-        if(!empty($column)){
-          echo $column;
-          $query->where($column,'like','%'.$keyword.'%');
+        if(!empty($col)){
+          echo $col;
+          $query->where($col,'like','%'.$keyword.'%');
         }else{
-          echo $column;
+          echo $col;
           $query->where('name','like','%'.$keyword.'%')->orWhere('author','like','%'.$keyword.'%');
         }
       }
@@ -33,7 +33,8 @@ class BookController extends Controller
       #ページネーション
       $data = $query->orderBy('created_at','desc')->paginate(10);
       return view('book.index')->with('books',$data)
-      ->with('keyword',$keyword);
+      ->with('keyword',$keyword)
+      ->with('col',$col);
   }
 
   public function edit($id)
