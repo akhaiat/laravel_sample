@@ -22,10 +22,8 @@ class BookController extends Controller
       if(!empty($keyword))
       {
         if(!empty($col)){
-          echo $col;
-          $query->where($col,'like','%'.$keyword.'%');
+           $query->where($col,'like','%'.$keyword.'%');
         }else{
-          echo $col;
           $query->where('name','like','%'.$keyword.'%')->orWhere('author','like','%'.$keyword.'%');
         }
       }
